@@ -66,14 +66,14 @@ OBJ_FILE_PATHS	= $(SRC_FILE_PATHS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILE_PATHS) $(BONUS_OBJ_FILES_PATHS)
-	ar rcs $(NAME) $(OBJ_FILE_PATHS) $(BONUS_OBJ_FILES_PATHS)
+$(NAME): $(OBJ_FILE_PATHS) $(BONUS_OBJ_FILE_PATHS)
+	ar rcs $(NAME) $(OBJ_FILE_PATHS) $(BONUS_OBJ_FILE_PATHS)
 
 #Pattern rule to compile individual source files to object files
 $(OBJ_FILE_PATHS): $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
-$(BONUS_OBJ_FILES_PATHS): $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
+$(BONUS_OBJ_FILE_PATHS): $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@ 
 	
 #create rule to compile individual source files for bonus to object files
