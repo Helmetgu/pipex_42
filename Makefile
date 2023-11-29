@@ -6,11 +6,12 @@
 #    By: mlow <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:14:15 by mlow              #+#    #+#              #
-#    Updated: 2023/11/24 13:19:50 by mlow             ###   ########.fr        #
+#    Updated: 2023/11/29 16:11:30 by mlow             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
+LIBFT = ./libft_project/libft.a
 
 CC = gcc 
 CFLAGS = -Wall -Werror -Wextra
@@ -89,11 +90,14 @@ OTHER_OBJ_FILE_PATHS = $(OTHER_SRC_FILE_PATHS:.c=.o)
 # ************************************************************************** */
 #	RULES                                                                */
 # ************************************************************************** */
-all: $(NAME)
+all: $(NAME) $(LIBFT)
 
 $(NAME): $(OBJ_FILE_PATHS) $(OTHER_OBJ_FILE_PATHS)
 	$(CC) $(CFLAGS) $(OBJ_FILE_PATHS) $(OTHER_OBJ_FILE_PATHS) -o $(NAME)
-	
+
+$(LIBFT): 
+	make -C $(OTHER_SRC_DIR)
+
 $(OBJ_FILE_PATHS): $(SRC_DIR)/%.o : $(SRC_DIR)/%.c 
 	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
@@ -106,7 +110,7 @@ clean:
 
 #clear .o files including static library $(NAME)
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(LIBFT)
 
 #clean files and remake "all"
 re: fclean all
